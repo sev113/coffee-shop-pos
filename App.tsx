@@ -2,6 +2,8 @@ import { ActivityIndicator, Text, View } from "react-native";
 import { useFonts } from "expo-font";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 
+import AppRoot from "index";
+
 export default function App() {
   const [fontsLoaded] = useFonts({
     MontserratRegular: require("./assets/fonts/Montserrat-Regular.ttf"),
@@ -15,9 +17,5 @@ export default function App() {
       </View>
     );
   }
-  return (
-    <View>
-      <Text style={{ fontFamily: "MontserratRegular" }}>Hello World</Text>
-    </View>
-  );
+  return <AppRoot />;
 }
