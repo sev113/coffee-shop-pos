@@ -6,15 +6,19 @@ import {
   Dimensions,
   Image,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import LoginForm from "./components/LoginForm";
 import PinForm from "./components/PinForm";
 
 const WIDTH = Dimensions.get("window").width;
 
+type FromNameType = "LOGIN_FORM" | "PIN_FORM";
+
 const LoginScreen = () => {
+  const [formName, setFormName] = useState("LOGIN_FORM");
+
   const login = (v: object) => {
-    console.log(v);
+    setFormName("PIN_FORM");
   };
 
   return (
@@ -31,8 +35,10 @@ const LoginScreen = () => {
               style={styles.logo}
             />
           </View>
-          <LoginForm handleOnLogin={login} />
-          {/* <PinForm /> */}
+          {formName == "LOGIN_FORM" && <LoginForm handleOnLogin={login} />}
+          {formName == "PIN_FORM" && (
+            <PinForm handleOnSuccess={() => alert("good")} />
+          )}
         </View>
       </ImageBackground>
     </View>
@@ -48,7 +54,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   form_container: {
-    width: WIDTH * 0.7,
+    width: WIDTH * 0.75,
     backgroundColor: "rgba(255,255,255,0.5)",
     padding: 20,
     borderRadius: 10,
